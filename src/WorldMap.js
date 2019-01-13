@@ -15,6 +15,7 @@ class WorldMap extends Component {
   };
 
   render() {
+    let pins = this.props.data
     return (
       <div style={{ width: window.innerWidth, height: window.innerHeight }}>
         <ReactMapGL
@@ -28,27 +29,11 @@ class WorldMap extends Component {
           mapboxApiAccessToken={Config.map_key}
           mapStyle={"mapbox://styles/mapbox/streets-v10"}
         >
-          <Marker
-            latitude={40.7398127}
-            longitude={-73.9896502}
-            style={{ position: "relative" }}
-          >
-            <img
-              alt="map pin"
-              src={require("./icon.png")}
-              style={{ height: "30px", width: "30px" }}
-            />
 
-          </Marker>
-          <Popup
-            latitude={40.7398127}
-            longitude={-73.9896502}
-              tipSize={5}
-              anchor="top"
-              closeOnClick={true}
-            >
-              <div>Hiya</div>
-            </Popup>
+{pins.map(pin => {
+
+})}
+          
         </ReactMapGL>
       </div>
     );

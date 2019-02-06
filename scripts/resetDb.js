@@ -1,6 +1,6 @@
 const {
   db
-} = require('../models');
+} = require('../models/sequelize');
 
 const main = async () => {
   await db.sync({

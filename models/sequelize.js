@@ -4,10 +4,10 @@ const db = new Sequelize(process.env.DATABASE_URL,{
   dialect: 'postgres'
 });
 
-db.sync()
-  .then(() => {
-    console.log(`Database & tables created!`)
-  })
+// db.sync()
+//   .then(() => {
+//     console.log(`Database & tables created!`)
+//   })
 
   const Tweet = db.define('tweets', {
     id: {
@@ -27,7 +27,7 @@ db.sync()
     longitude: {
       type: Sequelize.TEXT
     }
-  })
+  }).catch(e => console.log(e))
 
   module.exports = {
     Tweet,

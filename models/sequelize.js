@@ -27,7 +27,7 @@ const db = new Sequelize(process.env.DATABASE_URL,{
     longitude: {
       type: Sequelize.TEXT
     }
-  }).catch(e => console.log(e))
+  })
 
   module.exports = {
     Tweet,

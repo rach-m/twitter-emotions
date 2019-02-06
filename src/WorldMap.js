@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactMapGL from "react-map-gl";
-import Config from "./Config";
+// import Config from "./Config";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Pin from "./Pin";
 
@@ -46,7 +46,7 @@ class WorldMap extends Component {
               viewport
             })
           }
-          mapboxApiAccessToken={Config.map_key}
+          mapboxApiAccessToken={process.env.map_key}
           // mapStyle={
           //   "mapbox://styles/mapbox/streets-v10"
           // } >

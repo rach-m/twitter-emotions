@@ -5,10 +5,10 @@ const Twitter = require("twitter-lite");
 const Tweet = require("./sequelize");
 const axios = require("axios");
 const server = express();
-const config = require("./config");
+// const config = require("./config");
 const request = require("request");
 const uuidv4 = require("uuid/v4");
-const subscriptionKey = config.translate_key_1;
+const subscriptionKey = process.env.translate_key_1;
 const sentiment = require("sentimentjs");
 const path = require('path');
 

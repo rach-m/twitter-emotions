@@ -8,6 +8,6 @@ module.exports = (sequelize, type) => {
     tweet: type.TEXT,
     location: type.TEXT,
     latitude: type.TEXT,
-    longitude: type.TEXT
+    longitude: type.TEXT,
   })
 }

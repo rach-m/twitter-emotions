@@ -2,61 +2,75 @@ import React from "react";
 import { Marker, Popup } from "react-map-gl";
 
 class Pin extends React.Component {
+  state = {
+    show: false
+  };
+
   render() {
     let pin;
     let icon;
 
-   if( this.props.tweet !== undefined) {
-     console.log(this.props.tweet)
+    if (this.props.score !== undefined) {
+      //  console.log(this.props.score)
 
-
-     if (this.props.tweet > 0){
-       icon = "happy.svg";
-     }
-     else if (this.props.tweet === 0){
-       icon = "neutral.svg"
-     }
-     else{
-       icon = "sad.svg"
-     }
+      if (this.props.score > 0) {
+        icon = "happy.svg";
+      } else if (this.props.score === 0) {
+        icon = "neutral.svg";
+      } else {
+        icon = "sad.svg";
+      }
     }
 
     this.props.latitude !== undefined
       ? (pin = (
           <div>
             <Marker
+              captureClick={false}
               latitude={Number(this.props.longitude)}
               longitude={Number(this.props.latitude)}
               style={{ position: "relative" }}
             >
-              <img
-                alt="map pin"
-                src={require(`./assets/${icon}`)}
-                style={{ height: "30px", width: "30px" }}
-              />
+              <button
+              style = {
+                {
+                  borderWidth: 0,
+                  background: "rgba(0, 0, 0, 0)",
+                  zIndex: 0
+                }
+              }
+                onClick={() => {
+                  this.setState({ show: true });
+                }}
+              >
+                <img
+                  alt="map pin"
+                  src={require(`./assets/${icon}`)}
+                  style={{ height: "25px", width: "25px", zIndex: 0 }}
+                />
+              </button>
             </Marker>
-            {/* <Popup
-              latitude={
-      Number(this.props.longitude)
-        }
-        longitude={
-          Number(this.props.latitude)
-
-        }
-        tipSize={
-          5
-        }
-        anchor="top"
-        closeOnClick={
-          true
-        } >
-        <div > Hiya </div>
-      </Popup> */}
+            {this.state.show ? (
+                <Popup
+                style = {{zIndex: 5, fontFamily: 'Helvetica', fontSize: 5}}
+                  onClose={() => {
+                    this.setState({ show: false });
+                  }}
+                  captureClick={true}
+                  closeButton={true}
+                  closeOnClick={true}
+                  latitude={Number(this.props.longitude)}
+                  longitude={Number(this.props.latitude)}
+                  tipSize={10}
+                >
+                  <div> {this.props.tweet}</div>
+                </Popup>
+              ) : null}
           </div>
         ))
       : (pin = "");
 
-    return pin;
+    return <div>{pin}</div>;
   }
 }
 export default Pin;

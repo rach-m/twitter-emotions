@@ -1,84 +1,77 @@
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  button:focus {
+    outline: none;
   }
+
+body{
+  font-size: 45px;
+
+}
+
+p{
+font-family: 'Nixie One', cursive;
+margin: 0 50;
+}
+
+@keyframes spin {
   to {
-    transform: rotate(360deg);
+    transform: rotate(1turn);
   }
 }
 
-	.state {
-	  fill: none;
-	  stroke: #a9a9a9;
-	  stroke-width: 1;
-	}
+.progress {
+  position: relative;
+  display: inline-block;
+  width: 5em;
+  height: 5em;
+  margin: 0 .5em;
+  font-size: 100px;
+  text-indent: 999em;
+  overflow: hidden;
+  animation: spin 1s infinite steps(8);
+}
 
-	.state:hover {
-	  fill-opacity: 0.5;
-	}
+.small.progress {
+  font-size: 6px;
+}
 
-	#tooltip {
-	  position: absolute;
-	  text-align: center;
-	  padding: 20px;
-	  margin: 10px;
-	  font: 12px sans-serif;
-	  background: lightsteelblue;
-	  border: 1px;
-	  border-radius: 2px;
-	  pointer-events: none;
-	}
+.large.progress {
+  font-size: 50px;
+}
 
-	#tooltip h4 {
-	  margin: 0;
-	  font-size: 14px;
-	}
+.progress:before,
+.progress:after,
+.progress>div:before,
+.progress>div:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 2.25em;
+  /* (container width - part width)/2  */
+  width: .5em;
+  height: 1.5em;
+  border-radius: .2em;
+  background: #eee;
+  box-shadow: 0 3.5em #eee;
+  /* container height - part height */
+  transform-origin: 50% 2.5em;
+  /* container height / 2 */
+}
 
-	#tooltip {
-	  background: rgba(0, 0, 0, 0.9);
-	  border: 1px solid grey;
-	  border-radius: 5px;
-	  font-size: 12px;
-	  width: auto;
-	  padding: 4px;
-	  color: white;
-	  opacity: 0;
-	}
+.progress:before {
+  background: #555;
+}
 
-	#tooltip table {
-	  table-layout: fixed;
-	}
+.progress:after {
+  transform: rotate(-45deg);
+  background: #777;
+}
 
-	#tooltip tr td {
-	  padding: 0;
-	  margin: 0;
-	}
+.progress>div:before {
+  transform: rotate(-90deg);
+  background: #999;
+}
 
-	#tooltip tr td:nth-child(1) {
-	  width: 50px;
-	}
-
-	#tooltip tr td:nth-child(2) {
-	  text-align: center;
-	}
+.progress>div:after {
+  transform: rotate(-135deg);
+  background: #bbb;
+}

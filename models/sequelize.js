@@ -11,21 +11,21 @@ db.sync()
 
   const Tweet = db.define('tweets', {
     id: {
-      type: db.INTEGER,
+      type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
     tweet:{
-    type: db.TEXT,
+    type: Sequelize.TEXT,
     },
     location:{
-      type: db.TEXT,
+      type: Sequelize.TEXT,
     },
     latitude: {
-      type: db.TEXT
+      type: Sequelize.TEXT
     },
     longitude: {
-      type: db.TEXT
+      type: Sequelize.TEXT
     }
   })
 

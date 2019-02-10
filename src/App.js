@@ -32,7 +32,7 @@ Axios.get("http://localhost:3001/db").then(tweets => {
     return <div> <Online > {this.state.emotions !== "" ? < WorldMap data = {
       this.state.emotions
     }
-    /> : <Loading />}
+    /> : <WorldMap />}
 </Online>
 <Offline>Sorry you are offline!</Offline>
 </div>

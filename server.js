@@ -26,10 +26,7 @@ server.use(
   })
 );
 
-const PORT = process.env.PORT || 3001;
-server.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
-});
+
 
 server.get("/", (req, res) => {
   res.json("hello world");
@@ -199,3 +196,9 @@ if (process.env.NODE_ENV == "production") {
     response.sendFile(path.join(__dirname, "build", "index.html"));
   });
 }
+
+
+const PORT = process.env.PORT || 3001;
+server.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+});

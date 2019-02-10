@@ -43,8 +43,7 @@
     "eject": "react-scripts eject",
     "start": "concurrently --kill - others - on - fail \"npm run server\" \"npm start\"",
     "db:reset": "node ./scripts/resetDb",
-    "heroku-postbuild": "npm run build",
-    "client": "cd client && npm start"
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -32,12 +32,6 @@ server.get("/", (req, res) => {
   res.json("hello world");
 });
 
-// server.get("/test", (req, res) => {
-//   Tweet.findAll().then(tweet => res.json(tweet)).then(data => {
-//     res.send(data)
-//   })
-// })
-
 server.delete("/db", async (req, res) => {
   let dbNum = await Tweet.findAndCountAll().then(response => response.count);
   if (dbNum > 750) {

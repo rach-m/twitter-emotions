@@ -43,7 +43,8 @@
     "eject": "react-scripts eject",
     "start": "concurrently --kill - others - on - fail \"npm run server\" \"npm start\"",
     "db:reset": "node ./scripts/resetDb",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "client": "cd client && npm start"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -57,6 +58,4 @@
   "devDependencies": {
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "compression-webpack-plugin": "^2.0.0"
-  },
-  "proxy": "http://localhost:3001"
-}
+  }}

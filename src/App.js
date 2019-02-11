@@ -17,7 +17,7 @@ class App extends Component {
 
   componentDidMount() {
 setInterval(() => {
-Axios.get("http://localhost:3001/db").then(tweets => {
+Axios.get("/db").then(tweets => {
   this.setState({
     emotions: tweets.data
   });

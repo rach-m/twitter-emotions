@@ -186,8 +186,8 @@ server.use("*", (req, res) => {
   });
 });
 
-if (process.env.NODE_ENV == "production") {
-  server.get("/*", function (request, response) {
+if (process.env.NODE_ENV === "production") {
+  server.get("*", function (request, response) {
     response.sendFile(path.join(__dirname, "build", "index.html"));
   });
 }

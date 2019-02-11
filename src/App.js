@@ -6,7 +6,6 @@ import Axios from "axios";
 import WorldMap from "./WorldMap";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Loading from "./Loading"
-import {Offline, Online} from "react-detect-offline"
 class App extends Component {
 
   state = {
@@ -36,12 +35,10 @@ Axios.get("/db").then(tweets => {
   }
 
   render() {
-    return <div> <Online > {this.state.emotions !== "" ? < WorldMap data = {
+    return <div> {this.state.emotions !== "" ? < WorldMap data = {
       this.state.emotions
     }
-    /> : ""}
-</Online>
-<Offline>Sorry you are offline!</Offline>
+    /> : <Loading />}
 </div>
   }
 }

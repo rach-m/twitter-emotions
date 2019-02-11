@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const db = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost:3000/twitter', {
+const db = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost:4567/twitter', {
   dialect: 'postgres'
 });
 

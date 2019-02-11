@@ -11,6 +11,7 @@ const uuidv4 = require("uuid/v4");
 const subscriptionKey = process.env.translate_key_1;
 const sentiment = require("sentimentjs");
 const path = require('path');
+const PORT = process.env.PORT || 4567;
 
 if (!subscriptionKey) {
   throw new Error("Environment variable for your subscription key is not set.");
@@ -91,7 +92,7 @@ server.get("/db", (req, res) => {
     .then(() => res.send(tweets))
     .catch(err => console.log(err));
 
-  axios.get("http://localhost:3001/api").then(response => response).catch(err => console.log(err));
+  axios.get("/api").then(response => response).catch(err => console.log(err));
   res.header("Access-Control-Allow-Origin", "*");
 });
 
@@ -150,7 +151,7 @@ server.get("/api", (req, res) => {
           });
 
           axios
-            .post("http://localhost:3001/api", {
+            .post("/api", {
               tweet: translate,
               location: tweet.place.full_name,
               latitude: tweet.coordinates.coordinates[0],
@@ -159,7 +160,7 @@ server.get("/api", (req, res) => {
             .then(response => response)
             .then(
               axios
-                .delete("http://localhost:3000/db")
+                .delete("/db")
                 .then(response => response).catch(err => console.log(err))
             )
             .catch(function(error) {
@@ -192,7 +193,7 @@ if (process.env.NODE_ENV == "production") {
 }
 
 
-const PORT = process.env.PORT || 3001;
+
 server.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });

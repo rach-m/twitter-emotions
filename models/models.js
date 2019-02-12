@@ -1,8 +1,20 @@
 const Sequelize = require('sequelize');
+let db;
 
-const db = new Sequelize(process.env.DATABASE_URL || 'twitter', "rachelmoskowitz", null, {
-  dialect: 'postgres'
-});
+if (process.env.DATABASE_URL) {
+  // the application is executed on Heroku ... use the postgres database
+ db = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    protocol: 'postgres',
+    logging: true //false
+  });
+} else {
+  // the application is executed on the local machine
+  db = new Sequelize('twitter', "rachelmoskowitz", null, {
+ dialect: 'postgres',
+ logging: true
+  });
+}
 
 db.sync()
   .then(() => {

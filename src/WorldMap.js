@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ReactMapGL from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Pin from "./Pin";
-
 class WorldMap extends Component {
   state = {
     viewport: {
@@ -45,7 +44,9 @@ class WorldMap extends Component {
               viewport
             })
           }
-          mapboxApiAccessToken={process.env.map_key}
+          mapboxApiAccessToken = {
+            "pk.eyJ1IjoicmFjaDY3NiIsImEiOiJjanBzc2pybmMxZmhuNGVvMzNvNnhtYW1wIn0.Sfb5UddO - q6W__ZTJs6x1Q"
+          }
           // mapStyle={
           //   "mapbox://styles/mapbox/streets-v10"
           // } >

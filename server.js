@@ -7,7 +7,8 @@ const axios = require("axios");
 const server = express();
 const request = require("request");
 const uuidv4 = require("uuid/v4");
-const subscriptionKey = process.env.translate_key_1;
+const config = require("./config")
+const subscriptionKey = process.env.translate_key_1 || config.translate_key_1;
 const sentiment = require("sentimentjs");
 const path = require('path');
 const PORT = process.env.PORT || 4567;
@@ -17,8 +18,8 @@ if (!subscriptionKey) {
 }
 
 server.use(logger("dev"));
-// server.use(express.static('public'));
-server.use(express.static("./build/"));
+server.use(express.static('public'));
+// server.use(express.static("./build/"));
 server.use(bodyParser.json());
 server.use(
   bodyParser.urlencoded({
@@ -29,13 +30,10 @@ server.use(
 
 
 server.get("/", (req, res) => {
- Tweet.findAll().then(response => res.json(response))
+ res.send('hello world')
 });
 
 
-server.get("/test", (req, res) => {
-  Tweet.findAll().then(response => res.json(response))
-});
 server.delete("/db", async (req, res) => {
   let dbNum = await Tweet.findAndCountAll().then(response => response.count);
   if (dbNum > 750) {
@@ -63,43 +61,9 @@ server.delete("/db", async (req, res) => {
   }
 });
 
-server.get("/db", (req, res) => {
-  let tempArray = [];
-  let score = [];
-  let tweets = [];
-  Tweet.findAll()
-    .then(data => {
-      return data.map(tweet => {
-        tempArray.push(tweet.dataValues.tweet);
-        return tweets.push(tweet.dataValues);
-      });
-    })
-    .then(() => {
-      let filteredArray = tempArray.filter(
-        arr => arr !== null && arr !== "null"
-      );
-      let sentimentStringsAnalysis = sentiment.stringsArray(filteredArray);
-      return sentimentStringsAnalysis;
-    })
-    .then(sentimentStringsAnalysis => {
-      return sentimentStringsAnalysis.stringsWithAnalyses.map(result => {
-        return score.push(result.overallResults.score);
-      });
-    })
-    .then(() => {
-      return tweets.map((tweet, index) => {
-        tweet.score = score[index];
-        return tweet.score;
-      });
-    })
-    .then(() => res.send(tweets))
-    .catch(err => console.log(err));
-
-  axios.get("/api").then(response => response).catch(err => console.log(err));
-  res.header("Access-Control-Allow-Origin", "*");
-});
 
 server.get("/api", (req, res) => {
+  console.log('GOT TO API AGAIN')
   let info = [];
   let translate;
   let parsed;
@@ -154,16 +118,16 @@ server.get("/api", (req, res) => {
           });
 
           axios
-            .post("/api", {
+            .post("http://localhost:4567/api", {
               tweet: translate,
               location: tweet.place.full_name,
               latitude: tweet.coordinates.coordinates[0],
               longitude: tweet.coordinates.coordinates[1]
             })
-            .then(response => response)
+            .then(response => console.log("posted",response))
             .then(
               axios
-                .delete("/db")
+                .delete("http://localhost:4567/db")
                 .then(response => response).catch(err => console.log(err))
             )
             .catch(function(error) {
@@ -176,6 +140,42 @@ server.get("/api", (req, res) => {
       .on("end", response => console.log("end"));
   };
   twitterAuth();
+});
+
+server.get("/db", (req, res) => {
+  let tempArray = [];
+  let score = [];
+  let tweets = [];
+  Tweet.findAll()
+    .then(data => {
+      return data.map(tweet => {
+        tempArray.push(tweet.dataValues.tweet);
+        return tweets.push(tweet.dataValues);
+      });
+    })
+    .then(() => {
+      let filteredArray = tempArray.filter(
+        arr => arr !== null && arr !== "null"
+      );
+      let sentimentStringsAnalysis = sentiment.stringsArray(filteredArray);
+      return sentimentStringsAnalysis;
+    })
+    .then(sentimentStringsAnalysis => {
+      return sentimentStringsAnalysis.stringsWithAnalyses.map(result => {
+        return score.push(result.overallResults.score);
+      });
+    })
+    .then(() => {
+      return tweets.map((tweet, index) => {
+        tweet.score = score[index];
+        return tweet.score;
+      });
+    })
+    .then(() => res.send(tweets))
+    .catch(err => console.log(err));
+
+  res.header("Access-Control-Allow-Origin", "*");
+  axios.get("http://localhost:4567/api").then(response => console.log(response)).catch(err => console.log("API", err));
 });
 
 server.post("/api", (req, res) => {

@@ -41,8 +41,6 @@ db.sync()
     }
   })
 
-  console.log(Tweet.findAll())
-
   module.exports = {
      db,
     Tweet

@@ -16,21 +16,22 @@ class App extends Component {
 
   componentDidMount() {
     Axios.get("/db").then(tweets => {
+
       this.setState({
         emotions: tweets.data
       });
     }).catch(err => {
       console.log(err)
     })
-setInterval(() => {
-Axios.get("/db").then(tweets => {
-  this.setState({
-    emotions: tweets.data
-  });
-}).catch(err => {
-  console.log(err)
-})
-}, 30000);
+// setInterval(() => {
+// Axios.get("/db").then(tweets => {
+//   this.setState({
+//     emotions: tweets.data
+//   });
+// }).catch(err => {
+//   console.log(err)
+// })
+// }, 30000);
 
   }
 

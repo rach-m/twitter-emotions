@@ -118,7 +118,7 @@ server.get("/api", (req, res) => {
           });
 
           axios
-            .post("http://localhost:4567/api", {
+            .post("https://twitter-emotions.herokuapp.com/api", {
               tweet: translate,
               location: tweet.place.full_name,
               latitude: tweet.coordinates.coordinates[0],
@@ -127,7 +127,7 @@ server.get("/api", (req, res) => {
             .then(response => console.log("posted",response))
             .then(
               axios
-                .delete("http://localhost:4567/db")
+                .delete("https://twitter-emotions.herokuapp.com/db")
                 .then(response => response).catch(err => console.log(err))
             )
             .catch(function(error) {
@@ -175,7 +175,7 @@ server.get("/db", (req, res) => {
     .catch(err => console.log(err));
 
   res.header("Access-Control-Allow-Origin", "*");
-  axios.get("http://localhost:4567/api").then(response => console.log(response)).catch(err => console.log("API", err));
+  axios.get("https://twitter-emotions.herokuapp.com/api").then(response => console.log(response)).catch(err => console.log("API", err));
 });
 
 server.post("/api", (req, res) => {

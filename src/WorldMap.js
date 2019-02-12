@@ -45,7 +45,7 @@ class WorldMap extends Component {
             })
           }
           mapboxApiAccessToken = {
-            "pk.eyJ1IjoicmFjaDY3NiIsImEiOiJjanBzc2pybmMxZmhuNGVvMzNvNnhtYW1wIn0.Sfb5UddO - q6W__ZTJs6x1Q"
+            "pk.eyJ1IjoicmFjaDY3NiIsImEiOiJjanBzc2pybmMxZmhuNGVvMzNvNnhtYW1wIn0.Sfb5UddO-q6W__ZTJs6x1Q"
           }
           // mapStyle={
           //   "mapbox://styles/mapbox/streets-v10"

@@ -2,13 +2,13 @@ const express = require("express");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
 const Twitter = require("twitter-lite");
-const Tweet = require("./models/sequelize.js");
+const Tweet = require("./models/models").Tweet;
 const axios = require("axios");
 const server = express();
-// const config = require("./config");
+const config = require("./config");
 const request = require("request");
 const uuidv4 = require("uuid/v4");
-const subscriptionKey = process.env.translate_key_1;
+const subscriptionKey = process.env.translate_key_1 || config.translate_key_1;
 const sentiment = require("sentimentjs");
 const path = require('path');
 const PORT = process.env.PORT || 4567;
@@ -30,9 +30,13 @@ server.use(
 
 
 server.get("/", (req, res) => {
-  res.json("hello world");
+ Tweet.findAll().then(response => res.json(response))
 });
 
+
+server.get("/test", (req, res) => {
+  Tweet.findAll().then(response => res.json(response))
+});
 server.delete("/db", async (req, res) => {
   let dbNum = await Tweet.findAndCountAll().then(response => response.count);
   if (dbNum > 750) {

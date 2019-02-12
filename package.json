@@ -57,5 +57,7 @@
   "devDependencies": {
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "compression-webpack-plugin": "^2.0.0"
-  }
+  },
+  "proxy": "http://localhost:4567"
 }
+

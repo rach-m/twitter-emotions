@@ -1,13 +1,13 @@
 const Sequelize = require('sequelize');
 
-const db = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost:4567/twitter', {
+const db = new Sequelize(process.env.DATABASE_URL || 'twitter', "rachelmoskowitz", null, {
   dialect: 'postgres'
 });
 
-// db.sync()
-//   .then(() => {
-//     console.log(`Database & tables created!`)
-//   })
+db.sync()
+  .then(() => {
+    console.log(`Database & tables created!`)
+  })
 
   const Tweet = db.define('tweets', {
     id: {
@@ -29,7 +29,9 @@ const db = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost:4567/
     }
   })
 
+  console.log(Tweet.findAll())
+
   module.exports = {
-    Tweet,
-    db
+     db,
+    Tweet
   }

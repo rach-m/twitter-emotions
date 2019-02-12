@@ -18,8 +18,8 @@ if (!subscriptionKey) {
 }
 
 server.use(logger("dev"));
-server.use(express.static('public'));
-// server.use(express.static("./build/"));
+// server.use(express.static('public'));
+server.use(express.static("./build/"));
 server.use(bodyParser.json());
 server.use(
   bodyParser.urlencoded({

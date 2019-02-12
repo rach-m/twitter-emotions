@@ -1,6 +1,6 @@
 const {
   Tweet
-} = require('../models/sequelize.js')
+} = require('../models/models')
 
 const main = async () => {
 
